@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuanLyNhanSu_KTPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Bienban">
+          <Key>
+            <PropertyRef Name="PK_sMabienban" />
+          </Key>
+          <Property Name="PK_sMabienban" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="dNgaylap" Type="datetime" Nullable="false" />
+          <Property Name="FK_sMaNV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sNddanhgia" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tbl_Nhanvien">
+          <Key>
+            <PropertyRef Name="PK_sMaNV" />
+          </Key>
+          <Property Name="PK_sMaNV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sTenNV" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="dNgaysinh" Type="datetime" />
+          <Property Name="sGioitinh" Type="nvarchar" MaxLength="3" />
+          <Property Name="sCCCD" Type="varchar" MaxLength="12" />
+          <Property Name="sDiachi" Type="nvarchar" MaxLength="20" />
+          <Property Name="sSDT" Type="varchar" MaxLength="10" />
+          <Property Name="sEmail" Type="varchar" MaxLength="20" />
+          <Property Name="dNgayvaolam" Type="datetime" />
+          <Property Name="fLuongcb" Type="float" />
+          <Property Name="sTinhtrang" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Bienban_Nhanvien">
+          <End Role="tbl_Nhanvien" Type="Self.tbl_Nhanvien" Multiplicity="1" />
+          <End Role="tbl_Bienban" Type="Self.tbl_Bienban" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Nhanvien">
+              <PropertyRef Name="PK_sMaNV" />
+            </Principal>
+            <Dependent Role="tbl_Bienban">
+              <PropertyRef Name="FK_sMaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyNhanSu_KTPMModelStoreContainer">
+          <EntitySet Name="tbl_Bienban" EntityType="Self.tbl_Bienban" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Nhanvien" EntityType="Self.tbl_Nhanvien" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bienban_Nhanvien" Association="Self.FK_Bienban_Nhanvien">
+            <End Role="tbl_Nhanvien" EntitySet="tbl_Nhanvien" />
+            <End Role="tbl_Bienban" EntitySet="tbl_Bienban" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLyNhanSu_KTPMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Bienban">
+          <Key>
+            <PropertyRef Name="PK_sMabienban" />
+          </Key>
+          <Property Name="PK_sMabienban" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dNgaylap" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_sMaNV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sNddanhgia" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Nhanvien" Relationship="Self.FK_Bienban_Nhanvien" FromRole="tbl_Bienban" ToRole="tbl_Nhanvien" />
+        </EntityType>
+        <EntityType Name="tbl_Nhanvien">
+          <Key>
+            <PropertyRef Name="PK_sMaNV" />
+          </Key>
+          <Property Name="PK_sMaNV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sTenNV" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dNgaysinh" Type="DateTime" Precision="3" />
+          <Property Name="sGioitinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="sCCCD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="sDiachi" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="sSDT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="sEmail" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dNgayvaolam" Type="DateTime" Precision="3" />
+          <Property Name="fLuongcb" Type="Double" />
+          <Property Name="sTinhtrang" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_Bienban" Relationship="Self.FK_Bienban_Nhanvien" FromRole="tbl_Nhanvien" ToRole="tbl_Bienban" />
+        </EntityType>
+        <Association Name="FK_Bienban_Nhanvien">
+          <End Role="tbl_Nhanvien" Type="Self.tbl_Nhanvien" Multiplicity="1" />
+          <End Role="tbl_Bienban" Type="Self.tbl_Bienban" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Nhanvien">
+              <PropertyRef Name="PK_sMaNV" />
+            </Principal>
+            <Dependent Role="tbl_Bienban">
+              <PropertyRef Name="FK_sMaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyNhanSu_KTPMEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Bienban" EntityType="Self.tbl_Bienban" />
+          <EntitySet Name="tbl_Nhanvien" EntityType="Self.tbl_Nhanvien" />
+          <AssociationSet Name="FK_Bienban_Nhanvien" Association="Self.FK_Bienban_Nhanvien">
+            <End Role="tbl_Nhanvien" EntitySet="tbl_Nhanvien" />
+            <End Role="tbl_Bienban" EntitySet="tbl_Bienban" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLyNhanSu_KTPMModelStoreContainer" CdmEntityContainer="QuanLyNhanSu_KTPMEntities1">
+          <EntitySetMapping Name="tbl_Bienban">
+            <EntityTypeMapping TypeName="QuanLyNhanSu_KTPMModel.tbl_Bienban">
+              <MappingFragment StoreEntitySet="tbl_Bienban">
+                <ScalarProperty Name="PK_sMabienban" ColumnName="PK_sMabienban" />
+                <ScalarProperty Name="dNgaylap" ColumnName="dNgaylap" />
+                <ScalarProperty Name="FK_sMaNV" ColumnName="FK_sMaNV" />
+                <ScalarProperty Name="sNddanhgia" ColumnName="sNddanhgia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Nhanvien">
+            <EntityTypeMapping TypeName="QuanLyNhanSu_KTPMModel.tbl_Nhanvien">
+              <MappingFragment StoreEntitySet="tbl_Nhanvien">
+                <ScalarProperty Name="PK_sMaNV" ColumnName="PK_sMaNV" />
+                <ScalarProperty Name="sTenNV" ColumnName="sTenNV" />
+                <ScalarProperty Name="dNgaysinh" ColumnName="dNgaysinh" />
+                <ScalarProperty Name="sGioitinh" ColumnName="sGioitinh" />
+                <ScalarProperty Name="sCCCD" ColumnName="sCCCD" />
+                <ScalarProperty Name="sDiachi" ColumnName="sDiachi" />
+                <ScalarProperty Name="sSDT" ColumnName="sSDT" />
+                <ScalarProperty Name="sEmail" ColumnName="sEmail" />
+                <ScalarProperty Name="dNgayvaolam" ColumnName="dNgayvaolam" />
+                <ScalarProperty Name="fLuongcb" ColumnName="fLuongcb" />
+                <ScalarProperty Name="sTinhtrang" ColumnName="sTinhtrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
